@@ -1,0 +1,12 @@
+version: '2'
+services:
+
+
+  mailhog:
+    image: mailhog/mailhog
+    network_mode: bridge
+    env_file:
+      - ../.env
+    environment:
+      - VIRTUAL_HOST=mail.${PROJECT_NAME}.lvh.me
+      - VIRTUAL_PORT=8025

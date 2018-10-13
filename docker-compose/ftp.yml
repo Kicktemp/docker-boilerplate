@@ -1,0 +1,13 @@
+version: '2'
+services:
+  #######################################
+  # FTP (vsftpd)
+  #######################################
+  ftp:
+    build:
+      context: ../docker/vsftpd/
+    volumes:
+      - ../:/application/
+    env_file:
+      - etc/environment.yml
+      - etc/environment.development.yml

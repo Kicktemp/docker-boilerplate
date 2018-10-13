@@ -1,0 +1,20 @@
+version: '2'
+services:
+  #######################################
+  # PHP application Docker container
+  #######################################
+  app:
+    build:
+      context: ../.
+      dockerfile: Dockerfile
+    network_mode: bridge
+    volumes:
+      - ../:/docker/
+    privileged: true
+    env_file:
+      - ../.env
+      - ../etc/environment.yml
+      - ../etc/environment.development.yml
+    environment:
+      - VIRTUAL_HOST=${PROJECT_NAME}.lvh.me
+      - POSTFIX_RELAYHOST=mail:1025

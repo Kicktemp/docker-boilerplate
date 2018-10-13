@@ -1,0 +1,14 @@
+version: '2'
+services:
+  solr:
+#    image: webdevops/typo3-solr:6.0
+    image: webdevops/typo3-solr:5.0
+#    image: webdevops/typo3-solr:4.0
+#    image: webdevops/typo3-solr:3.1
+    env_file:
+      - ../.env
+      - ../etc/environment.yml
+      - ../etc/environment.development.yml
+    environment:
+      - VIRTUAL_HOST=solr.${PROJECT_NAME}.lvh.me
+      - VIRTUAL_PORT=8983

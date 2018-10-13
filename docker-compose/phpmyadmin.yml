@@ -1,0 +1,11 @@
+version: '2'
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    network_mode: bridge
+    env_file:
+      - ../.env
+    environment:
+      - PMA_HOSTS=mysql
+      - VIRTUAL_HOST=pma.${PROJECT_NAME}.lvh.me
+      - VIRTUAL_PORT=80

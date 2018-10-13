@@ -1,0 +1,12 @@
+version: '2'
+services:
+  #######################################
+  # Redis
+  #######################################
+  redis:
+    build:
+      context: ../docker/redis/
+    network_mode: bridge
+    env_file:
+      - ../etc/environment.yml
+      - ../etc/environment.development.yml

@@ -1,0 +1,135 @@
+version: '2'
+services:
+  #######################################
+  # nginx-proxy
+  #######################################
+#  nginx-proxy:
+#    extends:
+#      file: docker-compose/nginx-proxy.yml
+#      service: nginx-proxy
+
+  #######################################
+  # PHP application Docker container
+  #######################################
+  app:
+    extends:
+      file: docker-compose/app.yml
+      service: app
+    volumes_from:
+      - storage
+    volumes:
+      - ./public:/app/public
+      - ./entrypoint.d/boot.sh:/entrypoint.d/boot.sh
+#    depends_on:
+#      - nginx-proxy
+    links:
+      - mail
+      - mysql
+      #- postgres
+      #- solr
+      #- elasticsearch
+      #- redis
+      #- memcached
+      #- ftp
+
+  #######################################
+  # MySQL server
+  #######################################
+  mysql:
+    extends:
+      file: docker-compose/mysql.yml
+      service: mysql
+    volumes_from:
+      - storage
+
+  #######################################
+  # Mail
+  #######################################
+  mail:
+    extends:
+      file: docker-compose/mail.yml
+      service: mailhog #oder mailcatcher oder mailsandbox
+
+  #######################################
+  # phpMyAdmin
+  #######################################
+  phpmyadmin:
+    extends:
+      file: docker-compose/phpmyadmin.yml
+      service: phpmyadmin
+    links:
+      - mysql
+    volumes:
+      - /sessions
+
+  #######################################
+  # Solr server
+  #######################################
+  #solr:
+  #  extends:
+  #    file: docker-compose/solr.yml
+  #    service: solr
+  #  volumes_from:
+  #    - storage
+
+  #######################################
+  # Memcached
+  #######################################
+  #memcached:
+  #  extends:
+  #    file: docker-compose/memcached.yml
+  #    service: memcached
+  #  volumes_from:
+  #    - storage
+
+  #######################################
+  # FTP (vsftpd)
+  #######################################
+  #ftp:
+  #  extends:
+  #    file: docker-compose/ftp.yml
+  #    service: ftp
+  #  volumes_from:
+  #    - storage
+
+  #######################################
+  # PostgreSQL server
+  #######################################
+  #postgres:
+  #  extends:
+  #    file: docker-compose/postgres.yml
+  #    service: postgres
+  #  volumes_from:
+  #    - storage
+  #  volumes_from:
+  #    - storage
+
+  #######################################
+  # Elasticsearch
+  #######################################
+  #elasticsearch:
+  #  extends:
+  #    file: docker-compose/elasticsearch.yml
+  #    service: elasticsearch
+  #  volumes_from:
+  #    - storage
+
+  #######################################
+  # Redis
+  #######################################
+  #redis:
+  #  extends:
+  #    file: docker-compose/redis.yml
+  #    service: redis
+  #  volumes_from:
+  #    - storage
+
+  #######################################
+  # Storage
+  #######################################
+  storage:
+    build:
+      context: docker/storage/
+    volumes:
+      - /storage
+

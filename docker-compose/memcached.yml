@@ -1,0 +1,8 @@
+version: '2'
+services:
+  memcached:
+    build:
+      context: ../docker/memcached/
+    env_file:
+      - ../etc/environment.yml
+      - ../etc/environment.development.yml

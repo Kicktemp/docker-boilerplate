@@ -1,0 +1,12 @@
+version: '2'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    network_mode: bridge
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ../docker/nginx-proxy/conf.d/custom.conf:/etc/nginx/conf.d/custom.conf
