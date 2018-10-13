@@ -1,20 +1,2 @@
-FIRST_INSTALL
-
-public/typo3
-public/typo3_src
-public/index.php
-public/typo3conf/autoload
-
-# Ignore cache
-public/typo3conf/temp_CACHED*
-public/typo3conf/temp_fieldInfo.php
-public/typo3conf/deprecation_*.log
-public/typo3conf/AdditionalConfiguration.php
-# Ignore system folders, you should have them symlinked.
-# If not comment out the following entries.
-# Ignore temp directory.
-public/typo3temp
-public/fileadmin/_processed_
-
 # Ignore editor environment settings
 .idea
